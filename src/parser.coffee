@@ -204,6 +204,10 @@ TAGS =
     type: 'MMOD'
     handler: trueHandler
 
+  'writeonly':
+    type: 'MMOD'
+    handler: trueHandler
+
   'default':
     type: 'MMOD'
     handler: contentHandler
