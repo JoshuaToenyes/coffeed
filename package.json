@@ -1,18 +1,22 @@
 {
   "name": "coffeed",
-  "description": "",
-  "author": "Joshua Toenyes <josh@goatriot.com>",
-  "private": true,
-  "version": "1.0.0",
+  "description": "Another documentation generator for CoffeeScript.",
+  "author": "Joshua Toenyes <joshua.toenyes@me.com>",
+  "bin": {
+    "coffeed": "./dist/cli.js"
+  },
+  "private": false,
+  "version": "0.1.0-beta.1",
   "dependencies": {
     "async": "0.9.x",
     "glob": "4.3.x",
-    "js-yaml": "3.2.2",
     "commander": "2.3.x",
     "lodash": "2.4.x",
     "mkdirp": "0.5.x",
     "underscore.string": "2.3.x",
-    "chalk": "0.5.x"
+    "chalk": "0.5.x",
+    "config": "1.1.0",
+    "js-yaml": "3.2.2"
   },
   "devDependencies": {
     "mocha": "1.21.x",

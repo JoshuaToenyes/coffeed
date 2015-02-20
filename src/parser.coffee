@@ -3,6 +3,7 @@ _ = require 'lodash'
 _str = require 'underscore.string'
 fs = require 'fs'
 async = require 'async'
+config    = require 'config'
 
 
 documentation = null
@@ -106,6 +107,14 @@ TAGS =
     synonyms: 'method func constructor'
     modifiers: 'param this returns throws'
     named: true
+    description: true
+    summary: true
+    handler: pushMember
+
+  'constructor':
+    type: 'MEM'
+    modifiers: 'param this returns throws'
+    named: false
     description: true
     summary: true
     handler: pushMember
@@ -380,7 +389,7 @@ WRITEUP_REGEX = new RegExp("((?!@#{TAGS_ORD}).)*")
 # Regex to grab the first sentence from a block of text.
 SUMMARY_REGEX = /^(.*?)[.?!]/
 
-TYPE_PART = "{\w+}"
+TYPE_PART = "[.*]"
 
 NAME_PART = "\w+"
 
@@ -390,7 +399,7 @@ TAG_PARTS_UNTYPED_NONAME = new RegExp("@#{TAGS_ORD}\\s+(.*)")
 
 TAG_PARTS_UNTYPED_NAMED = new RegExp("@#{TAGS_ORD}\\s+(\\w+)(\\s+(.*)|)")
 
-TAG_PARTS_TYPED_NAMED = new RegExp("@#{TAGS_ORD}\\s+\\{(\\w+)\\}\\s+(\\w+)(\\s+(.*)|)")
+TAG_PARTS_TYPED_NAMED = new RegExp("@#{TAGS_ORD}\\s+\\{(#{TYPE_PART})\\}\\s+(\\w+)(\\s+(.*)|)")
 
 parser =
 

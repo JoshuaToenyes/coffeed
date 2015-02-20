@@ -29,7 +29,7 @@ module.exports = (grunt) ->
       default_options:
         files:
           'dist/cli.js':
-            prepend: '#! /usr/bin/node\n'
+            prepend: '#! /usr/bin/env node\n'
             input: 'dist/cli.js'
 
     chmod:
