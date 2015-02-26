@@ -1,0 +1,10 @@
+coffeescript:
+
+  segment:
+    regexp:   \s*##\n*(([ ]*#.*\n)*)
+    flags:    g
+    i:        1
+
+  doclet:
+    regexp:   ^[ ]*#[ ]*
+    flags:    mg

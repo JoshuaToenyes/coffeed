@@ -10,6 +10,8 @@ module.exports = (grunt) ->
       app: ['src/**/*.coffee']
 
     coffee:
+      options:
+        sourceMap: true
       app:
         expand: true,
         flatten: false,

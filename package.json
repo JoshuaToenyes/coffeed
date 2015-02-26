@@ -11,12 +11,13 @@
     "async": "0.9.x",
     "glob": "4.3.x",
     "commander": "2.3.x",
-    "lodash": "2.4.x",
+    "lodash": "3.3.0",
     "mkdirp": "0.5.x",
     "underscore.string": "2.3.x",
     "chalk": "0.5.x",
     "config": "1.1.0",
-    "js-yaml": "3.2.2"
+    "js-yaml": "3.2.2",
+    "coffee-script": "1.9.1"
   },
   "devDependencies": {
     "mocha": "1.21.x",

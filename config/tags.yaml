@@ -1,0 +1,500 @@
+##
+# # Tag Definition Format
+#
+#
+# type:       block | member | modifier | additional | interal | access
+# content:    yes | no
+# synonyms:   <list of synonym tag names>
+# modifiers:  <list of valid modifier tags (only for member or block)>
+# content:    yes | no
+# typed:      yes | no
+# values:     <list of valid content values>
+
+file:
+  type:         block
+  synonyms:
+    - fileoverview
+    - overview
+  modifiers:
+    - author
+    - version
+  content:      yes
+  typed:        no
+  named:        no
+  values:
+
+class:
+  type:         block
+  synonyms:
+  modifiers:
+    - abstract
+    - extends
+    - mixes
+  content:      yes
+  typed:        no
+  named:        yes
+  values:
+
+namespace:
+  type:         block
+  synonyms:
+  modifiers:
+    - mixes
+  content:      yes
+  typed:        no
+  named:        yes
+  values:
+
+module:
+  type:         block
+  synonyms:
+  modifiers:
+    - mixes
+  content:      yes
+  typed:        no
+  named:        yes
+  values:
+
+
+
+
+function:
+  type:         member
+  synonyms:
+    - method
+    - func
+  modifiers:
+    - param
+    - this
+    - returns
+    - throws
+  content:      yes
+  typed:        no
+  named:        yes
+  values:
+
+constructor:
+  type:         member
+  synonyms:
+  modifiers:
+    - param
+    - this
+    - returns
+    - throws
+  content:      no
+  typed:        no
+  named:        no
+  values:
+
+property:
+  type:         member
+  synonyms:
+    - prop
+  modifiers:
+    - setter
+    - getter
+    - readonly
+    - writeonly
+  content:      yes
+  typed:        yes
+  named:        yes
+  values:
+
+field:
+  type:         member
+  synonyms:
+  modifiers:
+  content:      yes
+  typed:        yes
+  named:        yes
+  values:
+
+typedef:
+  type:         member
+  synonyms:
+  modifiers:
+    - param
+    - this
+    - returns
+    - throws
+    - property
+  content:      yes
+  typed:        yes
+  named:        yes
+  values:
+
+member:
+  type:         member
+  synonyms:
+    - var
+  modifiers:
+    - default
+  content:      yes
+  typed:        yes
+  named:        yes
+  values:
+
+enum:
+  type:         member
+  synonyms:
+  modifiers:
+  content:      yes
+  typed:        yes
+  named:        yes
+  values:
+
+struct:
+  type:         member
+  synonyms:
+  modifiers:
+    - field
+  content:      yes
+  typed:        no
+  named:        yes
+  values:
+
+constant:
+  type:         member
+  synonyms:
+    - const
+  modifiers:
+  content:      yes
+  typed:        yes
+  named:        yes
+  values:
+
+event:
+  type:         member
+  synonyms:
+  modifiers:
+  content:      yes
+  typed:        no
+  named:        yes
+  values:
+
+borrows:
+  type:         member
+  synonyms:
+  modifiers:
+  content:      yes
+  typed:        no
+  named:        no
+  values:
+
+# Member Modifiers
+
+param:
+  type:         modifier
+  synonyms:
+    - arg
+    - argument
+  content:      yes
+  typed:        yes
+  named:        yes
+  values:
+
+this:
+  type:         modifier
+  synonyms:
+  content:      yes
+  typed:        no
+  named:        no
+  values:
+
+returns:
+  type:         modifier
+  synonyms:
+    - return
+  content:      yes
+  typed:        yes
+  named:        no
+  values:
+
+throws:
+  type:         modifier
+  synonyms:
+  content:      yes
+  typed:        yes
+  named:        no
+  values:
+
+getter:
+  type:         modifier
+  synonyms:
+  content:      yes
+  typed:        no
+  named:        no
+  values:
+
+setter:
+  type:         modifier
+  synonyms:
+  content:      yes
+  typed:        no
+  named:        no
+  values:
+
+readonly:
+  type:         modifier
+  synonyms:
+  content:      yes
+  typed:        no
+  named:        no
+  values:
+
+writeonly:
+  type:         modifier
+  synonyms:
+  content:      yes
+  typed:        no
+  named:        no
+  values:
+
+default:
+  type:         modifier
+  synonyms:
+  content:      yes
+  typed:        no
+  named:        no
+  values:
+
+memberof:
+  type:         modifier
+  synonyms:
+  content:      yes
+  typed:        no
+  named:        no
+  values:
+
+override:
+  type:         modifier
+  synonyms:
+    - overrides
+  content:      yes
+  typed:        no
+  named:        no
+  values:
+
+abstract:
+  type:         modifier
+  synonyms:
+  content:      yes
+  typed:        no
+  named:        no
+  values:
+
+static:
+  type:         modifier
+  synonyms:
+  content:      yes
+  typed:        no
+  named:        no
+  values:
+
+instance:
+  type:         modifier
+  synonyms:
+  content:      yes
+  typed:        no
+  named:        no
+  values:
+
+fires:
+  type:         modifier
+  synonyms:
+  content:      yes
+  typed:        no
+  named:        no
+  values:
+
+version:
+  type:         modifier
+  synonyms:
+  content:      yes
+  typed:        no
+  named:        no
+  values:
+
+deprecated:
+  type:         modifier
+  synonyms:
+  content:      yes
+  typed:        no
+  named:        no
+  values:
+
+extends:
+  type:         modifier
+  synonyms:
+  content:      yes
+  typed:        no
+  named:        no
+  values:
+
+description:
+  type:         modifier
+  synonyms:
+  content:      yes
+  typed:        no
+  named:        no
+  values:
+
+summary:
+  type:         modifier
+  synonyms:
+  content:      yes
+  typed:        no
+  named:        no
+  values:
+
+type:
+  type:         modifier
+  synonyms:
+  content:      yes
+  typed:        no
+  named:        no
+  values:
+
+inheritdoc:
+  type:         modifier
+  synonyms:
+  content:      yes
+  typed:        no
+  named:        no
+  values:
+
+# Documents an inner symbol, accessible via Parent~innerSymbol.
+inner:
+  type:         modifier
+  synonyms:
+  content:      no
+  typed:        no
+  named:        no
+  values:
+
+# Documents a global symbol.
+global:
+  type:         modifier
+  synonyms:
+  content:      yes
+  typed:        no
+  named:        no
+  values:
+
+
+
+
+
+
+todo:
+  type:         additional
+  synonyms:
+  content:      yes
+  typed:        no
+  named:        no
+  values:
+
+example:
+  type:         additional
+  synonyms:
+  content:      yes
+  typed:        no
+  named:        no
+  values:
+
+tutorial:
+  type:         additional
+  synonyms:
+    - tut
+  content:      yes
+  typed:        no
+  named:        no
+  values:
+
+see:
+  type:         additional
+  synonyms:
+  content:      yes
+  typed:        no
+  named:        no
+  values:
+
+since:
+  type:         additional
+  synonyms:
+  content:      yes
+  typed:        no
+  named:        no
+  values:
+
+license:
+  type:         additional
+  synonyms:
+  content:      yes
+  typed:        no
+  named:        no
+  values:
+
+requires:
+  type:         additional
+  synonyms:
+  content:      yes
+  typed:        no
+  named:        no
+  values:
+
+copyright:
+  type:         additional
+  synonyms:
+  content:      yes
+  typed:        no
+  named:        no
+  values:
+
+author:
+  type:         additional
+  synonyms:
+  content:      yes
+  typed:        no
+  named:        no
+  values:
+
+
+
+
+# Access Modifiers
+
+access:
+  type:         access
+  synonyms:
+  content:      yes
+  typed:        no
+  named:        no
+  values:
+    - private
+    - public
+    - protected
+
+private:
+  type:         access
+  synonyms:
+  content:      yes
+  typed:        no
+  named:        no
+  values:
+
+protected:
+  type:         access
+  synonyms:
+  content:      yes
+  typed:        no
+  named:        no
+  values:
+
+public:
+  type:         access
+  synonyms:
+  content:      yes
+  typed:        no
+  named:        no
+  values:

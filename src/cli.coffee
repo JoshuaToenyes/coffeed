@@ -10,16 +10,16 @@ path      = require 'path'
 async     = require 'async'
 program   = require 'commander'
 parser    = require './parser'
+async     = require 'async'
 
 # Currently supported file extensions.
 SUPPORTED_FILE_EXTENSIONS = ['.coffee']
 
 
-
 processFiles = (filePaths) ->
-  for path in filePaths
-    parser.parse path
-
+  async.map filePaths, parser.parse, (err, results) ->
+    debugger
+    #console.log err, results
 
 
 # Takes an array of file names and/or directories and converts it to a list
@@ -47,7 +47,6 @@ program
 .version('*|VERSION|*')
 .usage('[options] <path ...>')
 .option('-d, --debug', 'enable debugging output')
-.option('-i, --pid <path>', 'path to pid file')
 .parse(process.argv)
 
 processFiles parseArgs program.args

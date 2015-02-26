@@ -3,4 +3,5 @@ doc/
 node_modules/
 dist/
 test/**/*.js
+test/**/*.map
 npm-debug.log

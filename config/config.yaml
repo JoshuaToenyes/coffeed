@@ -1,0 +1,10 @@
+separators:
+
+  prefix:
+    inner:      '~'
+    static:     '::'
+    instance:   '#'
+
+  postfix:
+    module:     '/'
+    namespace:  '.'
