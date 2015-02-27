@@ -5,6 +5,33 @@ yaml    = require 'js-yaml'
 helpers = require './helpers'
 
 
+##
+# The TagType enum classifies tags into one of several types, which controls
+# how the tag is parsed.
+#
+# @enum {string} TagType
+#
+# @elem block      - Block tags such as @class and @namespace.
+# @elem member     - Member tags such as @method and @function.
+# @elem modifier   - Modifier tags such as @field, @var, @elem, etc.
+# @elem additional - Additive tags such as @requires and @copyright.
+# @elem access     - An access modifier tag, @private, @public, etc.
+
+
+##
+# Tag definitions define a tag and how it should be parsed and handled
+# throughout the parser and documentation generator.
+#
+# @struct TagDefinition
+#
+# @field {TagType} type            - The type of this tag.
+# @field {Array<string>} synonyms  - Array of alternative tag names.
+# @field {Array<string>} modifiers - List of tags that may modify this tag.
+# @field {boolean} content         - If this tag supports the content field.
+# @field {boolean} content         - If this tag is typed.
+# @field {Array<string>} values    - Array of allowed values.
+
+
 # This file (within the config/ directory) contains the YAML which defines
 # all parsable tag definitions.
 TAGS_CONFIG_FILE = 'tags.yaml'
@@ -45,23 +72,61 @@ class Tag
     @named      = helpers.truthy(def.named   or 'no')
 
 
-##
-# Array of all Tag classes as parsed from the tag definition file.
-#
-# @type Array<Tag>
-# @private
+  parse: (@content = '') ->
+    if @typed then @parseTypes()
+    if @named then @parseName()
 
-module.exports = tags = {}
+
+  parseTypes: ->
+    r = regexps.typeSnippet('g')
+    m = r.exec @content
+    @types = []
+    if m
+      m = m[1]
+      @content = @content.substring r.lastIndex
+      ts = m.split '|'
+      for t in ts
+        @types.push new Type t
+
+
+  parseName: ->
+    r = regexps.nameSnippet('g')
+    m = r.exec @content
+    @name = ''
+    if m
+      @name = m[1]
+      @content = @content.substring r.lastIndex
+
+
+customClasses = {}
+
+##
+# Private function which creates a new unique class for the passed tag name
+# and tag definition. The newly created class will then be attached to the
+# module exports for use throughout the parser. If a class exists with the
+# passed tag name, then that class is attached to the module exports. Classes
+# are created and named by their primary name in the tags configuration file,
+# i.e. tag synonyms do not get their own class.
+#
+# @param {string} Name - The name of the tag class to create (primary tag name).
+#
+# @param {Object} definition - The tag definition.
+#
+# @function createTagClass
+# @private
+createTagClass = (Name, definition) ->
+  name = Name
+  if customClasses[Name]?
+    module.exports[Name] = Name
+  else
+    module.exports[Name] = class extends Tag
+      constructor: ->
+        super(name, definition)
 
 
 # Iterate through each tag definition and instantiate a Tag class. Also,
 # instantiate a Tag instance for each of it's synonyms.
-for k, v of tagDefinitions
-  t = new Tag k, v
-  for s in t.synonyms
-    newSynonyms = _.without t.synonyms, k
-    st = new Tag s, v
-    st.synonyms = _.without t.synonyms, s
-    st.synonyms.push k
-    tags[s] = st
-  tags[k] = t
+for name, definition of tagDefinitions
+  createTagClass name, definition
+  for synonym in definition.synonyms?
+    module.exports[synonym] = module.exports[name]

@@ -10,6 +10,9 @@ languages = require './languages'
 helpers   = require './helpers'
 coffee    = require 'coffee-script'
 namepath  = require './namepath'
+Doc       = require './Doc'
+Tag       = require './Tag'
+
 
 tagsByType = (type) ->
   _.pick tags, (t) -> t.type is type
@@ -75,75 +78,44 @@ class Type
 
 
 
-class Tag
-
-  constructor: (@tagName, @content = '') ->
-    @typed = tags[@tagName].typed
-    if @typed then @parseTypes()
-    @named = tags[@tagName].named
-    if @named then @parseName()
-
-
-  parseTypes: ->
-    r = regexps.typeSnippet('g')
-    m = r.exec @content
-    @types = []
-    if m
-      m = m[1]
-      @content = @content.substring r.lastIndex
-      ts = m.split '|'
-      for t in ts
-        @types.push new Type t
-
-
-  parseName: ->
-    r = regexps.nameSnippet('g')
-    m = r.exec @content
-    @name = ''
-    if m
-      @name = m[1]
-      @content = @content.substring r.lastIndex
-    debugger
-
-
-
-
-class Doc
-
-  constructor: (segment) ->
-    d = regexps.description(tags).exec segment.doclet
-    @description = if d? then d[0] else ''
-    s = regexps.summary().exec @description
-    @summary = if s? then s[0] else ''
-    @tags = @containedTags(segment)
-
-  containedTags: (segment) ->
-    r = regexps.tagSnippet(tags)
-    ts = []
-    while t = r.exec(segment.doclet)
-      tagName = (_str.clean t[1]).substr 1
-      tagContent = _str.clean t[2]
-      tag = new Tag tagName, tagContent
-      ts.push tag
-    ts
-
-
-
-
-
-
 module.exports = parser =
 
+  ##
+  # Performs initial setup tasks before parsing a target.
+  #
+  # @param {string} path - The path to the target file.
+  #
+  # @param {function} cb - The callback function.
+  #
+  # @private
 
   setup: (path, cb) ->
     cb.call null, null, new Target(path)
 
+
+  ##
+  # Reads the file specified by the passed Target.
+  #
+  # @param {Target} target - The parsing target.
+  #
+  # @param {function} cb - Callback function.
+  #
+  # @private
 
   read: (target, cb) ->
     fs.readFile target.path, 'utf-8', (err, data) ->
       target.content = data
       cb.call null, err, target
 
+
+  ##
+  # Segments the passed target into documentation segments.
+  #
+  # @param {Target} target - The parsing target.
+  #
+  # @param {function} cb - Callback function.
+  #
+  # @private
 
   segment: (target, cb) ->
     r = regexps(target.lang).segment()
@@ -162,6 +134,15 @@ module.exports = parser =
     cb.call null, null, target
 
 
+  ##
+  # Processes the documentation segments in the passed parse target.
+  #
+  # @param {Target} target - The parsing target.
+  #
+  # @param {function} cb - Callback function.
+  #
+  # @private
+
   process: (target, cb) ->
     _.each target.segments, (segment) ->
       segment.doc = new Doc segment
@@ -174,6 +155,15 @@ module.exports = parser =
           segment.unknown = true
     cb.call null, null, target
 
+
+  ##
+  # Parses the documentation for the passed file path.
+  #
+  # @param {string} path - Path to file to document.
+  #
+  # @param {function} done - Callback function.
+  #
+  # @public
 
   parse: (path, done) ->
     async.waterfall [

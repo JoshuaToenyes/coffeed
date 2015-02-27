@@ -2,7 +2,7 @@
 # # Tag Definition Format
 #
 #
-# type:       block | member | modifier | additional | interal | access
+# type:       block | member | modifier | additional | access
 # content:    yes | no
 # synonyms:   <list of synonym tag names>
 # modifiers:  <list of valid modifier tags (only for member or block)>
@@ -101,8 +101,10 @@ property:
   values:
 
 field:
-  type:         member
+  type:         modifier
   synonyms:
+    - element
+    - var
   modifiers:
   content:      yes
   typed:        yes
@@ -126,7 +128,6 @@ typedef:
 member:
   type:         member
   synonyms:
-    - var
   modifiers:
     - default
   content:      yes
