@@ -2,10 +2,6 @@
 # Defines the Segment class.
 #
 # @fileoverview
-#
-# @requires coffee-script
-# @requires lodash
-# @requires underscore.string
 
 _         = require 'lodash'
 _str      = require 'underscore.string'

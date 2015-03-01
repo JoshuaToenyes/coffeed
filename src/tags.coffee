@@ -14,7 +14,7 @@ helpers = require './helpers'
 # @elem block      - Block tags such as @class and @namespace.
 # @elem member     - Member tags such as @method and @function.
 # @elem modifier   - Modifier tags such as @field, @var, @elem, etc.
-# @elem additional - Additive tags such as @requires and @copyright.
+# @elem additional - Additive tags such as @see and @copyright.
 # @elem access     - An access modifier tag, @private, @public, etc.
 
 

@@ -1,9 +1,6 @@
 ##
 # Defines the DocBlock class, which represents the documentation portion of
 # a parsed segment.
-#
-# @requires lodash
-# @requires underscore.string
 
 _       = require 'lodash'
 _str    = require 'underscore.string'
