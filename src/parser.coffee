@@ -11,7 +11,7 @@ helpers   = require './helpers'
 coffee    = require 'coffee-script'
 namepath  = require './namepath'
 Doc       = require './Doc'
-Tag       = require './Tag'
+Segment   = require './Segment'
 
 
 tagsByType = (type) ->
@@ -51,29 +51,6 @@ class Target
     @lang     = languages.detect path
     @content  = ''
     @segments = []
-
-
-class Segment
-  constructor: (@target, @raw, @sequence, @line) ->
-    r = regexps(@target.lang).segment()
-    q = regexps(@target.lang).doclet()
-    @raw      = helpers.cleanSegment @raw
-    @doclet   = (r.regexp.exec raw)[r.i]
-    @code     = raw.substring(r.regexp.lastIndex)
-    doclines  = helpers.countLines @doclet
-    codelines = helpers.countLeadingLines(@code)
-    @codeLine = @line + doclines + codelines + 1
-    @unknown  = false
-    @ignore   = false
-    @codeLine = @line + helpers.countLines(@doclet)
-    @doclet   = @doclet.replace q.regexp, ''
-    #nodes = coffee.nodes(@code).expressions[0]
-
-
-
-class Type
-
-  constructor: (type) ->
 
 
 
@@ -145,14 +122,14 @@ module.exports = parser =
 
   process: (target, cb) ->
     _.each target.segments, (segment) ->
-      segment.doc = new Doc segment
-      if classify(segment) is 'unknown'
-        if segment.sequence is 0
-          warnings.implicitFileOverview(segment)
-          segment.doc.tags.push new Tag('fileoverview')
-        else
-          warnings.unknownDoclet(segment)
-          segment.unknown = true
+      # segment.doc = new Doc segment
+      # if classify(segment) is 'unknown'
+      #   if segment.sequence is 0
+      #     warnings.implicitFileOverview(segment)
+      #     segment.doc.tags.push new Tag('fileoverview')
+      #   else
+      #     warnings.unknownDoclet(segment)
+      #     segment.unknown = true
     cb.call null, null, target
 
 

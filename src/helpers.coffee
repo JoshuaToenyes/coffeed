@@ -22,19 +22,6 @@ module.exports = helpers =
       process.exit 1
     return parsed
 
-
-  cleanSegment: (content) ->
-    content = content.replace /^\n+/g, ''
-    spc = 0
-    i = 0
-    clean = []
-    while content.charAt(i++) is ' '
-      spc++
-    _.each _str.lines(content), (l) ->
-      clean.push l.substring(spc)
-    clean = clean.join '\n'
-    _str.trim clean
-
   count: (str, regex) ->
     count = 0
     while regex.exec(str) isnt null

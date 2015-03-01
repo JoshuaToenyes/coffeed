@@ -5,6 +5,6 @@ coffeescript:
     flags:    g
     i:        1
 
-  doclet:
+  docBlock:
     regexp:   ^[ ]*#[ ]*
     flags:    mg

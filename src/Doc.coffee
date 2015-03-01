@@ -5,8 +5,7 @@
 
 _str    = require 'underscore.string'
 regexps = require './regexps'
-Tag     = require './Tag'
-
+tags    = require './tags'
 
 ##
 # Represents the parsed documentation portion of a Segment.

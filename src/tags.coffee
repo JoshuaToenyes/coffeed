@@ -62,14 +62,7 @@ catch
 
 class Tag
 
-  constructor: (@name, def) ->
-    @type       = def.type
-    @synonyms   = def.synonyms  or []
-    @modifiers  = def.modifiers or []
-    @values     = def.values    or []
-    @content    = helpers.truthy(def.content or 'no')
-    @typed      = helpers.truthy(def.typed   or 'no')
-    @named      = helpers.truthy(def.named   or 'no')
+  constructor: (@content) ->
 
 
   parse: (@content = '') ->
@@ -100,6 +93,19 @@ class Tag
 
 customClasses = {}
 
+
+parseTagDefinition = (def) ->
+  return {
+    type:        def.type
+    synonyms:    def.synonyms  or []
+    modifiers:   def.modifiers or []
+    values:      def.values    or []
+    content:     helpers.truthy(def.content or 'no')
+    typed:       helpers.truthy(def.typed   or 'no')
+    named:       helpers.truthy(def.named   or 'no')
+  }
+
+
 ##
 # Private function which creates a new unique class for the passed tag name
 # and tag definition. The newly created class will then be attached to the
@@ -120,13 +126,18 @@ createTagClass = (Name, definition) ->
     module.exports[Name] = Name
   else
     module.exports[Name] = class extends Tag
-      constructor: ->
-        super(name, definition)
+
+      @definition: parseTagDefinition(definition)
+
+      constructor: (content) ->
+        super(content)
+        @name = name
 
 
 # Iterate through each tag definition and instantiate a Tag class. Also,
 # instantiate a Tag instance for each of it's synonyms.
 for name, definition of tagDefinitions
   createTagClass name, definition
-  for synonym in definition.synonyms?
+  definition.synonyms ?= []
+  for synonym in definition.synonyms
     module.exports[synonym] = module.exports[name]
