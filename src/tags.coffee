@@ -3,6 +3,7 @@ fs      = require 'fs'
 path    = require 'path'
 yaml    = require 'js-yaml'
 helpers = require './helpers'
+regexps = require './regexps'
 
 
 ##
@@ -65,9 +66,9 @@ class Tag
   constructor: (@content) ->
 
 
-  parse: (@content = '') ->
-    if @typed then @parseTypes()
-    if @named then @parseName()
+  parse: ->
+    if @definition.typed then @parseTypes()
+    if @definition.named then @parseName()
 
 
   parseTypes: ->
@@ -77,9 +78,7 @@ class Tag
     if m
       m = m[1]
       @content = @content.substring r.lastIndex
-      ts = m.split '|'
-      for t in ts
-        @types.push new Type t
+      @types = m.split '|'
 
 
   parseName: ->
@@ -127,11 +126,12 @@ createTagClass = (Name, definition) ->
   else
     module.exports[Name] = class extends Tag
 
-      @definition: parseTagDefinition(definition)
+      definition: parseTagDefinition(definition)
 
       constructor: (content) ->
         super(content)
         @name = name
+        @parse()
 
 
 # Iterate through each tag definition and instantiate a Tag class. Also,

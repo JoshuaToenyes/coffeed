@@ -236,4 +236,4 @@ createSymbolClass = (Name, parent) ->
         super()
 
 for tagName, tag of tags
-  createSymbolClass tagName, symbolClasses[tag.definition.type]
+  createSymbolClass tagName, symbolClasses[tag::definition.type]

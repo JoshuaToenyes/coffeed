@@ -103,28 +103,6 @@ module.exports = parser =
 
 
   ##
-  # Processes the documentation segments in the passed parse target.
-  #
-  # @param {Target} target - The parsing target.
-  #
-  # @param {function} cb - Callback function.
-  #
-  # @private
-
-  process: (target, cb) ->
-    _.each target.segments, (segment) ->
-      # segment.doc = new Doc segment
-      # if classify(segment) is 'unknown'
-      #   if segment.sequence is 0
-      #     warnings.implicitFileOverview(segment)
-      #     segment.doc.tags.push new Tag('fileoverview')
-      #   else
-      #     warnings.unknownDoclet(segment)
-      #     segment.unknown = true
-    cb.call null, null, target
-
-
-  ##
   # Parses the documentation for the passed file path.
   #
   # @param {string} path - Path to file to document.
@@ -138,6 +116,5 @@ module.exports = parser =
       (cb) -> parser.setup(path, cb)
       parser.read
       parser.segment
-      parser.process
     ], (err, result) ->
       done.call null, err, result
