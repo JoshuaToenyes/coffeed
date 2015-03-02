@@ -12,10 +12,13 @@ coffee    = require 'coffee-script'
 namepath  = require './namepath'
 Doc       = require './Doc'
 Segment   = require './Segment'
+Target    = require './Target'
+symbols   = require './symbols'
 
 
 tagsByType = (type) ->
   _.pick tags, (t) -> t.type is type
+
 
 blockTags       = tagsByType 'block'
 memberTags      = tagsByType 'member'
@@ -41,18 +44,6 @@ classify = (segment) ->
     return 'member'
   else
     return 'unknown'
-
-
-
-
-
-class Target
-  constructor: (@path) ->
-    @lang     = languages.detect path
-    @content  = ''
-    @segments = []
-
-
 
 
 module.exports = parser =

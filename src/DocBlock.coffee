@@ -1,6 +1,8 @@
 ##
 # Defines the DocBlock class, which represents the documentation portion of
 # a parsed segment.
+#
+# @fileoverview
 
 _       = require 'lodash'
 _str    = require 'underscore.string'
@@ -29,8 +31,6 @@ module.exports = class DocBlock extends Block
     @summary = if summ? then summ[0] else ''
 
     @tags = DocBlock.parseTags(@content)
-
-    debugger
 
 
   ##

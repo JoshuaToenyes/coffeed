@@ -122,8 +122,8 @@ parseTagDefinition = (def) ->
 # @private
 createTagClass = (Name, definition) ->
   name = Name
-  if customClasses[Name]?
-    module.exports[Name] = Name
+  if _.has(customClasses, Name)
+    module.exports[Name] = customClasses[Name]
   else
     module.exports[Name] = class extends Tag
 

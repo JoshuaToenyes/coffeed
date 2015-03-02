@@ -2,7 +2,7 @@
 # # Tag Definition Format
 #
 #
-# type:       block | member | modifier | additional | access
+# type:       block | member | modifier | auxiliary | access
 # content:    yes | no
 # synonyms:   <list of synonym tag names>
 # modifiers:  <list of valid modifier tags (only for member or block)>
@@ -388,7 +388,7 @@ global:
 
 
 todo:
-  type:         additional
+  type:         auxiliary
   synonyms:
   content:      yes
   typed:        no
@@ -396,7 +396,7 @@ todo:
   values:
 
 example:
-  type:         additional
+  type:         auxiliary
   synonyms:
   content:      yes
   typed:        no
@@ -404,7 +404,7 @@ example:
   values:
 
 tutorial:
-  type:         additional
+  type:         auxiliary
   synonyms:
     - tut
   content:      yes
@@ -413,7 +413,7 @@ tutorial:
   values:
 
 see:
-  type:         additional
+  type:         auxiliary
   synonyms:
   content:      yes
   typed:        no
@@ -421,7 +421,7 @@ see:
   values:
 
 since:
-  type:         additional
+  type:         auxiliary
   synonyms:
   content:      yes
   typed:        no
@@ -429,7 +429,7 @@ since:
   values:
 
 license:
-  type:         additional
+  type:         auxiliary
   synonyms:
   content:      yes
   typed:        no
@@ -437,7 +437,7 @@ license:
   values:
 
 requires:
-  type:         additional
+  type:         auxiliary
   synonyms:
   content:      yes
   typed:        no
@@ -445,7 +445,7 @@ requires:
   values:
 
 copyright:
-  type:         additional
+  type:         auxiliary
   synonyms:
   content:      yes
   typed:        no
@@ -453,7 +453,7 @@ copyright:
   values:
 
 author:
-  type:         additional
+  type:         auxiliary
   synonyms:
   content:      yes
   typed:        no

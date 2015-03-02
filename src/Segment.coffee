@@ -6,7 +6,6 @@
 _         = require 'lodash'
 _str      = require 'underscore.string'
 CodeBlock = require './CodeBlock'
-coffee    = require 'coffee-script'
 DocBlock  = require './DocBlock'
 helpers   = require './helpers'
 regexps   = require './regexps'
@@ -90,5 +89,3 @@ module.exports = class Segment
 
     @unknown  = false
     @ignore   = false
-
-    #nodes = coffee.nodes(@code).expressions[0]
